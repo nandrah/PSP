@@ -1,21 +1,9 @@
-import java.util.Scanner;
 
 public class Calculator {
 
-public static List list = new List();
-public static double mean = 0;
-public static double std_dev = 0;
-
-public static void main(String args[]){
-	populate_list();
-	calculate_mean();
-	calculate_std_dev();
-	System.out.println("Mean: " + mean);
-	System.out.println("Standard deviation: " + std_dev);
-}
-
-public static void calculate_mean() {
+public double calculateMean(List list) {
 	double sum = 0;
+	double mean = 0;
 	if(list.size > 0){
 		Node current = list.first;
 		for(int i=0; i<list.size; i++) {
@@ -26,13 +14,12 @@ public static void calculate_mean() {
 		}
 		mean = sum/list.size;
 	}
+	return mean;
 }
 
-public static void calculate_std_dev() {
+public double calculateStdDev(List list, double mean) {
 	double sum = 0;
-	if(mean == 0) {
-		calculate_mean();
-	}
+	double std_dev = 0;
 	if(list.size > 0){
 		Node current = list.first;
 		for(int i=0; i<list.size; i++) {
@@ -43,16 +30,8 @@ public static void calculate_std_dev() {
 		}
 		std_dev = Math.sqrt(sum/(list.size-1));
 	}
+	return std_dev;
 }
 
-public static void populate_list() {
-	Scanner in = new Scanner(System.in);
-	Node new_node = null;
-	System.out.println("Introducir 10 numeros:");
-	for(int i=0; i<10; i++) {
-		new_node = new Node(in.nextFloat());
-		list.add_node(new_node);
-	}
-}
 
 }
